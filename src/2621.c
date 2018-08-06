@@ -21,13 +21,24 @@ int main() {
 		if(num[i] >= max)
 			max = num[i];
 	}
+	for(int i = 0; i < 5; i++) {
+		if(num[i] == 0)
+			return 0;
+	}
+	for(int i = 0; i < 5; i++) {
+		if(col[i][0] == 'R' || col[i][0] == 'B' || col[i][0] == 'Y' || col[i][0] == 'G') 
+			;
+		else 
+			return 0;
+	}
+
 	if(isSameColor() && isStraight()) {
 		score = max + 900;
 	}
 	else if(isFourCard()) {
 		score = four + 800;
 	}
-	else if(isTripleCard() && isPairCard()) {
+	else if(isPairCard() && isTripleCard()) {
 		score = triple * 10 + pair + 700;
 	}
 	else if(isSameColor()) {
