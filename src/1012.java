@@ -13,6 +13,7 @@ public class Main {
    static int x, y, xx, yy;
    static int[] dx = { 0, 1, 0, -1 };
    static int[] dy = { 1, 0, -1, 0 };
+   static int[] res;
 
    static void dfs(int n1, int n2) {
       isVisit[n1][n2] = true;
@@ -30,29 +31,22 @@ public class Main {
    public static void main(String[] args) throws IOException {
       BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
       StringTokenizer st = null;
-      st = new StringTokenizer(br.readLine());
-      T = Integer.parseInt(st.nextToken());
-      while (T > 0) {
+      T = Integer.parseInt(br.readLine());
+
+      for (int idx = 0; idx < T; idx++) {
          count = 0;
-         T--;
          st = new StringTokenizer(br.readLine(), " ");
          M = Integer.parseInt(st.nextToken());
          N = Integer.parseInt(st.nextToken());
          K = Integer.parseInt(st.nextToken());
          mat = new int[N][M];
-         for (int i = 0; i < N; i++)
-            for (int j = 0; j < M; j++)
-               mat[i][j] = 0;
          isVisit = new boolean[N][M];
-         for (int i = 0; i < N; i++)
-            for (int j = 0; j < M; j++)
-               isVisit[i][j] = false;
 
          for (int i = 0; i < K; i++) {
             st = new StringTokenizer(br.readLine(), " ");
             u = Integer.parseInt(st.nextToken());
             v = Integer.parseInt(st.nextToken());
-            mat[v][u] = 1;
+            mat[v][u] = 1; 
          }
 
          for (int i = 0; i < N; i++) {
@@ -63,7 +57,7 @@ public class Main {
                }
             }
          }
-         System.out.println("*" + count);
+         System.out.println(count);
       }
    }
 }
