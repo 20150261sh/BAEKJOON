@@ -41,6 +41,7 @@ public class Main {
 		col = new int[N];
 		for (int i = 0; i < N; i++)
 			col[i] = -1;
-		
+		back(0);
+		System.out.println(cnt);
 	}
 }
