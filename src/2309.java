@@ -32,5 +32,10 @@ public class Main {
       for (int i = 0; i < 9; i++) {
          height[i] = Integer.parseInt(br.readLine());
       }
+      Arrays.sort(height);
+      back(0, 0, total, 0);
+      for (int i = 0; i < 9; i++) {
+         System.out.println(heList.get(i));
+      }
    }
 }
