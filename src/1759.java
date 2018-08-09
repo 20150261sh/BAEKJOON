@@ -13,6 +13,24 @@ public class Main {
 
 	static void back(int d, int idx, String pwd) {
 		
+		if (L == d) {
+			int mo = 0;
+			int ja = 0;
+			for (int i = 0; i < pwd.length(); i++) {
+				if (pwd.charAt(i) == 'a' || pwd.charAt(i) == 'e' || pwd.charAt(i) == 'i' || pwd.charAt(i) == 'o'
+						|| pwd.charAt(i) == 'u')
+					mo++;
+				else
+					ja++;
+			}
+			if(mo >= 1 && ja >= 2) {
+				pwdList.add(pwd);
+			}
+			return;
+		} else {
+			for (; idx < C; idx++)
+				back(d + 1, idx + 1, pwd + word[idx]);
+		}
 	}
 
 	public static void main(String[] args) throws IOException {
