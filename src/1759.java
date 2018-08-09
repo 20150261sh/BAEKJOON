@@ -52,5 +52,9 @@ public class Main {
 		for(int i = 0; i < pwdList.size(); i++) {
 			res[i] = pwdList.get(i);
 		}
+		Arrays.sort(res);
+		for(int i = 0; i < pwdList.size(); i++) {
+			System.out.println(res[i]);
+		}
 	}
 }
