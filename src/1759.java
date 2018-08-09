@@ -11,6 +11,10 @@ public class Main {
 	static ArrayList<String> pwdList = new ArrayList<>();
 	static String pwd = "";
 
+	static void back(int d, int idx, String pwd) {
+		
+	}
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = null;
