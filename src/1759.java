@@ -48,5 +48,9 @@ public class Main {
 
 		Arrays.sort(word);
 		back(0, 0, pwd);
+		String[] res = new String[pwdList.size()];
+		for(int i = 0; i < pwdList.size(); i++) {
+			res[i] = pwdList.get(i);
+		}
 	}
 }
