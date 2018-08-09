@@ -45,5 +45,8 @@ public class Main {
 		st = new StringTokenizer(br.readLine(), " ");
 		for (int i = 0; i < C; i++)
 			word[i] = st.nextToken();
+
+		Arrays.sort(word);
+		back(0, 0, pwd);
 	}
 }
