@@ -13,7 +13,6 @@ public class Main {
 	static int[] dy = { 0, 0, -1, 1 };
 	static int xx, yy;
 	static Queue<Integer> q = new LinkedList<Integer>();
-	static int count = 0;
 
 	static void bfs(int n1, int n2) {
 		visit[n1][n2] = true;
@@ -34,10 +33,9 @@ public class Main {
 				else {
 					if (!visit[xx][yy] && mat[xx][yy] == 1) {
 						visit[xx][yy] = true;
+						mat[xx][yy] == mat[n1][n2] + 1;
 						q.add(xx);
 						q.add(yy);
-						count++;
-						check = true;
 					}
 				}
 			}
@@ -61,9 +59,6 @@ public class Main {
 		}
 		bfs(0, 0);
 		System.out.println(count);
-		// for(int i = 0; i < N; i++) {
-		// for(int j = 0; j < M; j++)
-		// System.out.print(mat[i][j] + " ");
-		// System.out.println();
+		System.out.println(mat[N-1][M-1]);
 	}
 }
