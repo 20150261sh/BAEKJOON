@@ -21,5 +21,16 @@ public class Main {
 		st = new StringTokenizer(br.readLine(), " ");
 		for(int i = 0; i < N; i++) 
 			P[i] = Integer.parseInt(st.nextToken());
+		
+		Arrays.sort(P);
+		for(int i = 0; i < N; i++) {
+			for(int j = 0; j < i+1; j++) 
+				res[i] += P[j];
+		}
+		
+		for(int i = 0; i < N; i++)
+			time += res[i];
+		
+		System.out.println(time);
 	}
 }
