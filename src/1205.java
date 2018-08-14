@@ -6,59 +6,62 @@ import java.util.*;
 public class Main {
 	static int N;
 	static int P;
-	static int[] rank;
-	static int[] pri;
+	static int[][] rank;
 	static int score;
-	static int max;
+	static int min = 2000000001;
 
 	static int ranking() {
 		if (N == P) {
-			for (int i = 0; i < N; i++) {
-				if (pri[i] != -1 && score >= pri[i])
-					return i + 1;
+			fif (score <= min)
+				return -1;
+			else {
+				int i;
+				for (i = 0; i < N; i++) {
+					if (rank[i][0] <= score)
+						return rank[i][1];
+				}
+				return -1;
 			}
-			return -1;
 		} else {
-//			for (int k = 0; k < N; k++)
-//				System.out.println(pri[k]);
 			int i;
 			for (i = 0; i < N; i++) {
-				if (pri[i] != -1 && score >= pri[i])
-					return i + 1;
-//				System.out.println("i is" + i);
+				if (rank[i][0] <= score)
+					return rank[i][1];
 			}
-			return i + 1;
+			return rank[i - 1][1] + 1;
 		}
 	}
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = null;
+
 		st = new StringTokenizer(br.readLine(), " ");
 		N = Integer.parseInt(st.nextToken());
 		score = Integer.parseInt(st.nextToken());
 		P = Integer.parseInt(st.nextToken());
-		rank = new int[P];
-		pri = new int[N];
-		for(int i = 0; i < P; i++)
-			rank[i] = -1;
-		for(int i = 0; i < N; i++) 
-			pri[i] = -1;
+		
+		rank = new int[P][2];
+		for (int i = 0; i < P; i++) {
+			for (int j = 0; j < 2; j++)
+				rank[i][j] = -1;
+		}
 
 		st = new StringTokenizer(br.readLine(), " ");
 		for (int i = 0; i < N; i++) {
-			rank[i] = Integer.parseInt(st.nextToken());
+			rank[i][0] = Integer.parseInt(st.nextToken());
+			if (rank[i][0] < min)
+				min = rank[i][0];
 		}
-		for (int i = 0; i < P - 1; i++) {
-			if (rank[i] != rank[i + 1])
-				pri[i] = rank[i];
-			else if (rank[i] == rank[i + 1]) {
-				pri[i] = rank[i];
-				pri[i + 1] = -1;
-				i++;
-			}
+
+		rank[0][1] = 1;
+		for (int i = 1; i < N; i++) {
+			if (rank[i - 1][0] == rank[i][0])
+				rank[i][1] = rank[i - 1][1];
+			else
+				rank[i][1] = i + 1;
 		}
-//		max = rank[0];
+
 		System.out.println(ranking());
 	}
 }
