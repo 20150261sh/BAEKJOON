@@ -6,22 +6,9 @@ import java.util.*;
 public class Main {
 	static int N;
 	static int P;
-	static int[][] rank;
+	static int[] rank;
 	static int score;
 	static int min = 2000000001;
-
-	static int ranking() {
-		if (N == P) {
-			if (score <= min)
-				return -1;
-		}
-		int i;
-		for (i = 0; i < N; i++) {
-			if (rank[i][0] <= score)
-				return rank[i][1];
-		}
-		return rank[i - 1][1] + 1;
-	}
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -32,38 +19,39 @@ public class Main {
 		score = Integer.parseInt(st.nextToken());
 		P = Integer.parseInt(st.nextToken());
 
-		//		if (10 > P || P > 50)
-//			return;
-//		if (0 > N || N > P)
-//			return;
-//		if (score > 2000000000)
-//			return;
-
-		rank = new int[P][2];
+		rank = new int[P];
 		for (int i = 0; i < P; i++) {
-			for (int j = 0; j < 2; j++)
-				rank[i][j] = -1;
+			rank[i] = -1;
 		}
 
-		if(N > 0) {
+		if (N > 0) {
 			st = new StringTokenizer(br.readLine(), " ");
 			for (int i = 0; i < N; i++) {
-				rank[i][0] = Integer.parseInt(st.nextToken());
-				if (rank[i][0] < min)
-					min = rank[i][0];
+				rank[i] = Integer.parseInt(st.nextToken());
+				if (rank[i] < min)
+					min = rank[i];
 			}
+		} else
+			min = -1;
 
-			rank[0][1] = 1;
-			for (int i = 1; i < N; i++) {
-				if (rank[i - 1][0] == rank[i][0])
-					rank[i][1] = rank[i - 1][1];
-				else
-					rank[i][1] = i + 1;
-			}
-
-			System.out.println(ranking());
+		boolean small = false;
+		for (int i = 0; i < N; i++) {
+			if (rank[i] >= score)
+				small = true;
+			else 
+				small = false;
 		}
-		else 
-			System.out.println(1);
+
+		if (N == P && small)
+			System.out.println("-1");
+		else {
+			for (int i = 0; i < P; i++) {
+				if (score >= rank[i]) {
+					System.out.println(i + 1);
+					return;
+				}
+			}
+		}
+
 	}
 }
