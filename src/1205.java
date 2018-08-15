@@ -12,24 +12,15 @@ public class Main {
 
 	static int ranking() {
 		if (N == P) {
-			fif (score <= min)
+			if (score <= min)
 				return -1;
-			else {
-				int i;
-				for (i = 0; i < N; i++) {
-					if (rank[i][0] <= score)
-						return rank[i][1];
-				}
-				return -1;
-			}
-		} else {
-			int i;
-			for (i = 0; i < N; i++) {
-				if (rank[i][0] <= score)
-					return rank[i][1];
-			}
-			return rank[i - 1][1] + 1;
 		}
+		int i;
+		for (i = 0; i < N; i++) {
+			if (rank[i][0] <= score)
+				return rank[i][1];
+		}
+		return rank[i - 1][1] + 1;
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -40,28 +31,39 @@ public class Main {
 		N = Integer.parseInt(st.nextToken());
 		score = Integer.parseInt(st.nextToken());
 		P = Integer.parseInt(st.nextToken());
-		
+
+		//		if (10 > P || P > 50)
+//			return;
+//		if (0 > N || N > P)
+//			return;
+//		if (score > 2000000000)
+//			return;
+
 		rank = new int[P][2];
 		for (int i = 0; i < P; i++) {
 			for (int j = 0; j < 2; j++)
 				rank[i][j] = -1;
 		}
 
-		st = new StringTokenizer(br.readLine(), " ");
-		for (int i = 0; i < N; i++) {
-			rank[i][0] = Integer.parseInt(st.nextToken());
-			if (rank[i][0] < min)
-				min = rank[i][0];
-		}
+		if(N > 0) {
+			st = new StringTokenizer(br.readLine(), " ");
+			for (int i = 0; i < N; i++) {
+				rank[i][0] = Integer.parseInt(st.nextToken());
+				if (rank[i][0] < min)
+					min = rank[i][0];
+			}
 
-		rank[0][1] = 1;
-		for (int i = 1; i < N; i++) {
-			if (rank[i - 1][0] == rank[i][0])
-				rank[i][1] = rank[i - 1][1];
-			else
-				rank[i][1] = i + 1;
-		}
+			rank[0][1] = 1;
+			for (int i = 1; i < N; i++) {
+				if (rank[i - 1][0] == rank[i][0])
+					rank[i][1] = rank[i - 1][1];
+				else
+					rank[i][1] = i + 1;
+			}
 
-		System.out.println(ranking());
+			System.out.println(ranking());
+		}
+		else 
+			System.out.println(1);
 	}
 }
