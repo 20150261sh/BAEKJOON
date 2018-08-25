@@ -32,38 +32,38 @@ int main() {
             return 0;
     }
 
-    if(isSameColor()) {
-        if(isStraight()) 
+    if(isStraight()) {
+        if(isSameColor()) 
             score = max + 900;
-        else 
-            score = max + 600;
+        else
+            score = max + 500;
+    }
+    else if(isSameColor()) {
+        score = max + 600;
     }
     else if(isFourCard()) {
         score = four + 800;
     }
-    else if(isPairCard() && isTripleCard()) {
-        score = triple * 10 + pair + 700;
-    }
-    else if(isStraight()) {
-        score = max + 500;
-    }
     else if(isTripleCard()) {
-        score = max + 400;
-    }
-    else if(isTwoPairCard()) {
-        score = twopairof[1] * 10 + twopairof[0] + 300;
+        if(isPairCard())
+            score = triple * 10 + pair + 700;
+        else
+            score = max + 400;
     }
     else if(isPairCard()) {
-        score = pair + 200;
+        if(isTwoPairCard()) 
+            score = twopairof[1] * 10 + twopairof[0] + 300;
+        else
+            score = max + 200;
     }
-    else
+    else 
         score = max + 100;
+
     printf("%d\n", score);
-    return 0;
 }
 
 int isSameColor() {
-    int color[4];
+    int color[4] = {0};
     for(int i = 0; i < 5; i++) {
         if(col[i][0] == 'R')
             color[0]++;
@@ -74,9 +74,10 @@ int isSameColor() {
         else if(col[i][0] == 'G')
             color[3]++;
     }
-    for(int i = 0; i < 5; i++) {
-        if(color[i] >= 5)
+    for(int i = 0; i < 4; i++) {
+        if(color[i] >= 5) {
             return 1;
+        }
     }
     return 0;
 }
