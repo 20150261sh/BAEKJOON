@@ -4,70 +4,63 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
+	static boolean check = false;
 	static double X;
 	static int N;
-	static double ans = 0;
-	static double ans1, ans2;
+	static int mid;
 	static double[] L;
+
+	static void robot(int l, int r, double find) {
+		if (l > r)
+			return;
+		mid = (l + r) / 2;
+		if (find > L[mid])
+			robot(mid + 1, r, find);
+		else if (find < L[mid])
+			robot(l, mid - 1, find);
+		else {
+			check = true;
+			return;
+		}
+	}
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = null;
-		boolean check = false;
 
 		while (true) {
+			check = false;
+
 			st = new StringTokenizer(br.readLine());
 			if (!st.hasMoreTokens())
 				break;
+
 			X = Double.parseDouble(st.nextToken());
 			st = new StringTokenizer(br.readLine());
 			N = Integer.parseInt(st.nextToken());
-			
-			if (N <= 1) {
-				System.out.println("danger");
-			} else {
-				ans = 0;
-				L = new double[N];
-				X *= 10000000;
 
-				for (int i = 0; i < N; i++) {
-					st = new StringTokenizer(br.readLine());
-					L[i] = Double.parseDouble(st.nextToken());
-				}
+			L = new double[N];
+			X *= 10000000;
 
-				double xx;
-				for (int i = 0; i < N; i++) {
-					xx = X;
-					xx -= L[i];
-					for (int j = 0; j < N; j++) {
-						if (i != j) {
-							xx -= L[j];
-							if (xx == 0) {
-								check = true;
-								double tmp = Math.abs(L[i] - L[j]);
-								if (tmp >= ans) {
-									ans = tmp;
-									if (L[i] < L[j]) {
-										ans1 = L[i];
-										ans2 = L[j];
-									} else {
-										ans1 = L[j];
-										ans2 = L[i];
-									}
-								}
-							}
-							xx += L[j];
-						}
-					}
-				}
-
-				if (check) {
-					System.out.print("yes " + (int) ans1 + " ");
-					System.out.println((int) ans2);
-				} else {
-					System.out.println("danger");
-				}
+			for (int i = 0; i < N; i++) {
+				st = new StringTokenizer(br.readLine());
+				L[i] = Double.parseDouble(st.nextToken());
 			}
+			Arrays.sort(L);
+			
+			if (N > 1) {
+				int i;
+				for (i = 0; i < N; i++) {
+					robot(0, N - 1, X - L[i]);
+					if (check)
+						break;
+				}
+				if (check)
+					System.out.println("yes " + (int)L[i] + " " + (int)L[mid]);
+				else
+					System.out.println("danger");
+			} else
+				System.out.println("danger");
 		}
 	}
 }
