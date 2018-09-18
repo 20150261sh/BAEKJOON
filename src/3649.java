@@ -5,23 +5,27 @@ import java.util.*;
 
 public class Main {
 	static boolean check = false;
-	static double X;
+	static int X;
 	static int N;
 	static int mid;
-	static double[] L;
+	static int[] L;
+	static int idx;
 
-	static void robot(int l, int r, double find) {
+	static void robot(int l, int r, int find) {
 		if (l > r)
 			return;
 		mid = (l + r) / 2;
-		if (find > L[mid])
-			robot(mid + 1, r, find);
-		else if (find < L[mid])
-			robot(l, mid - 1, find);
-		else {
-			check = true;
-			return;
+		if (idx != mid) {
+			if (find > L[mid])
+				robot(mid + 1, r, find);
+			else if (find < L[mid])
+				robot(l, mid - 1, find);
+			else {
+				check = true;
+				return;
+			}
 		}
+		return;
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -35,28 +39,27 @@ public class Main {
 			if (!st.hasMoreTokens())
 				break;
 
-			X = Double.parseDouble(st.nextToken());
+			X = Integer.parseInt(st.nextToken());
 			st = new StringTokenizer(br.readLine());
 			N = Integer.parseInt(st.nextToken());
 
-			L = new double[N];
+			L = new int[N];
 			X *= 10000000;
 
 			for (int i = 0; i < N; i++) {
 				st = new StringTokenizer(br.readLine());
-				L[i] = Double.parseDouble(st.nextToken());
+				L[i] = Integer.parseInt(st.nextToken());
 			}
 			Arrays.sort(L);
-			
+
 			if (N > 1) {
-				int i;
-				for (i = 0; i < N; i++) {
-					robot(0, N - 1, X - L[i]);
+				for (idx = 0; idx < N; idx++) {
+					robot(0, N - 1, X - L[idx]);
 					if (check)
 						break;
 				}
 				if (check)
-					System.out.println("yes " + (int)L[i] + " " + (int)L[mid]);
+					System.out.println("yes " + L[idx] + " " + L[mid]);
 				else
 					System.out.println("danger");
 			} else
