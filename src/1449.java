@@ -8,7 +8,7 @@ public class Main {
 	static int L;
 	static int[] sink;
 	static int count = 0;
-	static int taping = 0;
+	static double taping = 0;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -26,8 +26,9 @@ public class Main {
 		Arrays.sort(sink);
 
 		for (int i = 0; i < N; i++) {
-			if (sink[i] > taping) {
-				taping = sink[i] + L;
+			double cur = sink[i] - 0.5;
+			if (cur >= taping) {
+				taping = cur + L;
 				count++;
 			}
 		}
