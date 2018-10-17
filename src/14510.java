@@ -22,21 +22,21 @@ public class Main {
 		}
 
 		for (int i = day; i < N; i++) {
-			if (!visit[i] && N - i >= cons[0][i])
+			if (!visit[i] && N - i >= cons[0][i]) {
 				dfs(i, money);
+				visit[i] = false;
+			}
 		}
 	}
 
 	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		N = Integer.parseInt(st.nextToken());
+		Scanner sc = new Scanner(System.in);
+		N = sc.nextInt();
 		cons = new int[2][N];
 
 		for (int i = 0; i < N; i++) {
-			st = new StringTokenizer(br.readLine(), " ");
 			for (int j = 0; j < 2; j++) {
-				cons[j][i] = Integer.parseInt(st.nextToken());
+				cons[j][i] = sc.nextInt();
 			}
 		}
 
